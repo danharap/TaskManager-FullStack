@@ -8,10 +8,49 @@ export class AuthService {
   private userNameSubject = new BehaviorSubject<string | null>(this.getName());
   userName$ = this.userNameSubject.asObservable();
 
-  constructor(private supabaseService: SupabaseService) {}
+  // Tracks whether there is an active Supabase session.
+  // Populated synchronously from localStorage on startup, then kept
+  // up-to-date via onAuthStateChange.
+  private _isLoggedIn = false;
+
+  constructor(private supabaseService: SupabaseService) {
+    // Restore session state from whatever Supabase stored in localStorage
+    this.client.auth.getSession().then(({ data }) => {
+      this._isLoggedIn = !!data.session;
+      if (data.session && !this.getName()) {
+        // Session exists but localStorage was cleared — reload profile
+        this.loadProfile(data.session.user.id);
+      }
+    });
+
+    // Keep _isLoggedIn in sync on sign-in / sign-out / token refresh
+    this.client.auth.onAuthStateChange((event, session) => {
+      this._isLoggedIn = !!session;
+      if (!session) {
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userRole');
+        this.userNameSubject.next(null);
+      }
+    });
+  }
 
   private get client() {
     return this.supabaseService.client;
+  }
+
+  private loadProfile(userId: string) {
+    this.client
+      .from('profiles')
+      .select('username, role')
+      .eq('id', userId)
+      .single()
+      .then(({ data: profile }) => {
+        if (profile) {
+          localStorage.setItem('userName', profile.username);
+          localStorage.setItem('userRole', profile.role);
+          this.userNameSubject.next(profile.username);
+        }
+      });
   }
 
   login(email: string, password: string): Observable<any> {
@@ -26,6 +65,7 @@ export class AuthService {
             if (profileError) throw profileError;
             localStorage.setItem('userName', profile!.username);
             localStorage.setItem('userRole', profile!.role);
+            this._isLoggedIn = true;
             this.userNameSubject.next(profile!.username);
             return data;
           })
@@ -53,6 +93,7 @@ export class AuthService {
     this.client.auth.signOut();
     localStorage.removeItem('userName');
     localStorage.removeItem('userRole');
+    this._isLoggedIn = false;
     this.userNameSubject.next(null);
   }
 
@@ -61,7 +102,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.client.auth.getSession;
+    return this._isLoggedIn || !!localStorage.getItem('userName');
   }
 
   getRole(): string | null {
@@ -73,7 +114,6 @@ export class AuthService {
   }
 
   changeUsername(_currentUsername: string, newUsername: string): Observable<any> {
-    const userId = this.client.auth.getUser;
     return from(this.client.auth.getUser()).pipe(
       switchMap(({ data }) => {
         const uid = data.user!.id;
