@@ -1,90 +1,105 @@
+/* ─── DESIGN TOKENS ─── */
 :root {
-  --background-color: #ffffff;
-  --primary-color: #0056b3;
-  --secondary-color: #f8f9fa;
-  --sidebar-color: #0056b3;
-  --text-color: #333;
-  --sidebar-text-color: #f1f1f1;
-  --border-color: #ccc;
-  --hover-color: #004494;
-  --th-color: #E9EAE9;
-  --cal-color: #333;
-  
+  --background-color: #f8fafc;
+  --primary-color: #1e3a8a;
+  --secondary-color: #ffffff;
+  --sidebar-color: #0f172a;
+  --text-color: #0f172a;
+  --text-muted: #64748b;
+  --sidebar-text-color: #ffffff;
+  --border-color: #e2e8f0;
+  --hover-color: #1e40af;
+  --th-color: #f1f5f9;
+  --cal-color: #374151;
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+  --card-shadow-hover: 0 8px 30px rgba(0,0,0,0.10);
+  --radius: 12px;
+  --radius-sm: 8px;
 }
 
 :root.dark-mode {
-  --background-color: #2e2e2e;
-  --primary-color: #6a0dad;
-  --secondary-color: #3a3a3a;
-  --sidebar-color: #6a0dad;
-  --text-color: #f1f1f1;
-  --sidebar-text-color: #f1f1f1;
-  --border-color: #555;
-  --hover-color: #4b0082;
-  --th-color: #2e2e2e;
-  --cal-color: #f1f1f1;
-  
+  --background-color: #0f172a;
+  --primary-color: #3b82f6;
+  --secondary-color: #1e293b;
+  --sidebar-color: #0a0f1e;
+  --text-color: #f1f5f9;
+  --text-muted: #94a3b8;
+  --sidebar-text-color: #f1f5f9;
+  --border-color: #334155;
+  --hover-color: #2563eb;
+  --th-color: #1e293b;
+  --cal-color: #94a3b8;
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+  --card-shadow-hover: 0 8px 30px rgba(0,0,0,0.4);
 }
 
-body {
+/* ─── GLOBAL RESET ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 16px;
+  color: var(--text-color);
   background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 700;
+  margin: 0;
   color: var(--text-color);
 }
 
-button {
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+p, span, label, input, textarea, select, button {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
-button:hover {
-  background-color: var(--hover-color);
-}
-
+/* ─── GLOBAL FORM ELEMENTS ─── */
 input, textarea, select {
   background-color: var(--secondary-color);
   color: var(--text-color);
-  border: 1px solid var(--border-color);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
 }
 
 input:focus, textarea:focus, select:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 5px var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
 }
 
-/* Global font styling */
-html, body {
-  font-family: 'Roboto', Arial, sans-serif; /* Use Roboto as the primary font */
-  font-size: 16px; /* Set a base font size */
-  color: #333; /* Default text color */
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-* {
-  box-sizing: inherit; /* Ensure consistent box-sizing across all elements */
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto', Arial, sans-serif; /* Ensure headings use the same font */
-  font-weight: bold; /* Make headings bold */
-  margin: 0;
-}
-
-p, span, label, input, textarea, select, button {
-  font-family: 'Roboto', Arial, sans-serif; /* Ensure all text elements use the same font */
-  font-size: 1rem; /* Default font size for text elements */
-  line-height: 1.5; /* Improve readability */
-}
-
+/* ─── GLOBAL BUTTONS ─── */
 button {
-  font-family: 'Roboto', Arial, sans-serif; /* Ensure buttons use the same font */
-  font-size: 1rem;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 9px 18px;
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s;
 }
 
+button:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* ─── LAYOUT ─── */
 main {
   margin: 0;
   padding: 0;
@@ -93,47 +108,24 @@ main {
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .main-content {
-  padding: 20px; /* Add padding for spacing */
-  transition: margin-left 0.3s ease; /* Smooth transition for responsiveness */
+  padding: 24px;
+  padding-top: 80px; /* 56px banner + 24px breathing room */
+  transition: margin-left 0.3s ease;
 }
 
 .main-content.sidebar-visible {
-  margin-left: 240px; /* Matches the sidebar width */
+  margin-left: 240px;
 }
 
 html.auth-page .main-content {
-  margin-left: 0; /* Remove margin when the sidebar is not present */
+  margin-left: 0;
 }
 
-html.dark-mode .main-content {
-  background-color: var(--background-color); /* Ensure background matches dark mode */
-  color: var(--text-color); /* Ensure text is readable in dark mode */
-
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-  .main-content {
-    margin-left: 0; /* Remove margin when the sidebar is full-width */
-    padding: 10px; /* Adjust padding for smaller screens */
-  }
-}
-
-.content {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-.content.full-width {
-  margin-right: 0; /* Full width when the sidebar is hidden */
-}
-
-/* Ensure the overlay container is full-screen and centers the dialog */
+/* ─── DIALOG / OVERLAY ─── */
 .cdk-overlay-container {
   position: fixed;
   top: 0;
@@ -143,11 +135,12 @@ html.dark-mode .main-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensure it appears above other elements */
+  z-index: 1000;
 }
 
 .cdk-overlay-backdrop {
-  background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent backdrop */
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
 }
 
 .cdk-overlay-pane {
@@ -157,30 +150,28 @@ html.dark-mode .main-content {
 }
 
 .mat-mdc-dialog-panel {
-  width: auto !important; /* Allow the dialog to adjust dynamically */
-  min-width: 300px !important; /* Set the minimum width */
-  max-width: 90%; /* Optional: Prevent the dialog from being too wide */
-  box-sizing: border-box; /* Ensure padding is included in the width */
+  width: auto !important;
+  min-width: 300px !important;
+  max-width: 90%;
+  box-sizing: border-box;
 }
 
-.mat-dialog-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px; /* Smooth edges */
-  background-color: #f9f9f9; /* Slightly different background color */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  padding: 20px;
-  border: 1px solid #ccc; /* Light border */
-}
-
+.mat-dialog-container,
 .custom-dialog-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px; /* Smooth edges */
-  background-color: #f9f9f9; /* Slightly different background color */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  border-radius: var(--radius);
+  background-color: var(--secondary-color);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
   padding: 20px;
-  border: 1px solid #ccc; /* Light border */
+  border: 1px solid var(--border-color);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .main-content {
+    margin-left: 0;
+    padding: 16px;
+  }
 }

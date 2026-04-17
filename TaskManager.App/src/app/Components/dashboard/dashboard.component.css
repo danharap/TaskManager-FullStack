@@ -1,101 +1,112 @@
 .dashboard-container {
-  padding: 40px 20px; /* Add padding: 40px for top/bottom, 20px for left/right */
+  padding: 32px 28px;
   max-width: 1200px;
   margin: 0 auto;
   font-family: 'Roboto', Arial, sans-serif;
-  background-color: var(--secondary-color); /* Use variable for background */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .dashboard-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  padding: 20px;
-  background-color: var(--background-color); /* Use variable for header background */
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  align-items: flex-start;
+  margin-bottom: 28px;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #312e81 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(30,58,138,0.25);
+  color: #fff;
 }
 
 .dashboard-title h1 {
-  font-size: 2rem;
-  margin: 0;
-  color: var(--text-color); /* Use variable for text color */
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
 }
 
 .dashboard-title p {
-  font-size: 1rem;
-  color: var(--text-color); /* Use variable for text color */
-  margin: 5px 0 0;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
 }
 
 .dashboard-role {
   text-align: right;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
 }
 
 .dashboard-role p {
-  font-size: 1rem;
-  color: var(--text-color); /* Use variable for text color */
+  font-size: 0.825rem;
+  color: rgba(255,255,255,0.6);
   margin: 0;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 5px 12px;
+  border-radius: 20px;
 }
 
 .dashboard-controls {
   display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 24px;
   align-items: center;
-}
-
-.create-task-button {
-  padding: 10px 15px;
-  background-color: var(--primary-color); /* Use variable for button background */
-  color: white;; /* Use variable for text color */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.create-task-button:hover {
-  background-color: var(--hover-color); /* Use variable for hover effect */
-  transform: translateY(-2px);
+  flex-wrap: wrap;
 }
 
 .search-input {
-  padding: 10px;
-  border: 1px solid var(--border-color); /* Use variable for border */
-  border-radius: 5px;
+  padding: 10px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9px;
   flex: 1;
-  background-color: var(--background-color); /* Use variable for input background */
-  color: var(--text-color); /* Use variable for text color */
+  min-width: 200px;
+  background-color: #fff;
+  color: #0f172a;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .search-input:focus {
-  border-color: var(--primary-color); /* Use variable for focus border */
-  box-shadow: 0 0 5px var(--primary-color);
+  border-color: #1e3a8a;
+  box-shadow: 0 0 0 3px rgba(30,58,138,0.1);
+}
+
+.dashboard-controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #64748b;
+  white-space: nowrap;
 }
 
 .sort-select,
 .priority-select {
-  padding: 5px;
-  border: 1px solid var(--border-color); /* Use variable for border */
-  border-radius: 5px;
-  background-color: var(--background-color); /* Use variable for select background */
-  color: var(--text-color); /* Use variable for text color */
+  padding: 9px 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9px;
+  background-color: #fff;
+  color: #0f172a;
+  font-size: 0.875rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.sort-select:focus,
+.priority-select:focus {
+  border-color: #1e3a8a;
 }
 
 .sort-select:hover,
 .priority-select:hover {
-  border-color: var(--primary-color); /* Use variable for hover border */
+  border-color: #94a3b8;
 }
 
 .task-list-container {
-  margin-top: 20px;
-  background-color: var(--background-color); /* Use variable for task list background */
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
 }

@@ -1,140 +1,111 @@
-/* Main Dialog Container */
 .update-task-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 30px; /* Adjust padding for better spacing */
-  background-color: var(--secondary-color); /* Light mode background */
-  border-radius: 12px; /* Smooth edges */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  width: 90%; /* Use 90% of the viewport width */
-  max-width: 600px; /* Set a maximum width */
-  min-width: 400px; /* Ensure the dialog doesn't become too skinny */
-  max-height: 90vh; /* Ensure it doesn't exceed the viewport height */
-  overflow-y: auto; /* Add scrolling only if necessary */
-  margin: 50px auto; /* Center the form horizontally and vertically */
-  box-sizing: border-box; /* Include padding and border in the width */
-  font-family: 'Arial', sans-serif;
+  gap: 0;
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  width: 90%;
+  max-width: 540px;
+  min-width: 360px;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: 40px auto;
+  box-sizing: border-box;
 }
 
-html.dark-mode .update-task-container {
-  background-color: var(--background-color); /* Dark mode background */
-  color: var(--text-color); /* Dark mode text color */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Adjust shadow for dark mode */
-}
-
-/* Header */
 h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
   text-align: center;
-  color: var(--text-color); /* Use variable for text color */
-  font-size: 1.8rem;
-  margin-bottom: 20px;
 }
 
-html.dark-mode h2 {
-  color: var(--text-color); /* Ensure readability in dark mode */
-}
-
-/* Form Labels */
 label {
   display: flex;
   flex-direction: column;
-  font-size: 1rem;
-  color: var(--text-color); /* Use variable for text color */
-  margin-bottom: 15px;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 14px;
 }
 
-html.dark-mode label {
-  color: var(--text-color); /* Ensure labels are readable in dark mode */
-}
-
-/* Input Fields */
 input,
 textarea,
 select {
-  padding: 12px; /* Increased padding for better usability */
-  font-size: 1rem;
-  border: 1px solid var(--border-color); /* Use variable for border */
-  border-radius: 8px;
+  padding: 10px 13px;
+  font-size: 0.9rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9px;
   outline: none;
-  background-color: var(--secondary-color); /* Light mode input background */
-  color: var(--text-color); /* Use variable for text color */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-html.dark-mode input,
-html.dark-mode textarea,
-html.dark-mode select {
-  background-color: var(--background-color); /* Dark mode input background */
-  color: var(--text-color); /* Ensure text is readable in dark mode */
-  border: 1px solid var(--border-color); /* Dark mode border */
+  background-color: #f8fafc;
+  color: #0f172a;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: 'Roboto', Arial, sans-serif;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--primary-color); /* Highlight border on focus */
-  box-shadow: 0 0 5px var(--primary-color); /* Subtle glow effect */
+  border-color: #1e3a8a;
+  box-shadow: 0 0 0 3px rgba(30,58,138,0.1);
+  background-color: #fff;
 }
 
-/* Textarea Specific */
 textarea {
   resize: none;
-  height: 120px; /* Slightly taller for better usability */
+  height: 110px;
 }
 
-/* Dialog Actions */
 .dialog-actions {
   display: flex;
-  justify-content: space-between;
-  gap: 15px; /* Add spacing between buttons */
-  margin-top: 20px;
+  gap: 10px;
+  margin-top: 8px;
 }
 
 .dialog-actions button {
   flex: 1;
-  padding: 12px 20px;
-  background-color: var(--primary-color); /* Button background */
-  color: var(--sidebar-text-color); /* Button text color */
+  padding: 11px;
+  border-radius: 9px;
+  font-size: 0.9rem;
+  font-weight: 600;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: opacity 0.15s, transform 0.15s;
 }
 
-.dialog-actions button:hover {
-  background-color: var(--hover-color); /* Hover effect */
-  transform: translateY(-2px); /* Slight lift effect */
+.dialog-actions button[type="submit"],
+.dialog-actions button[mat-button]:first-child {
+  background: linear-gradient(135deg, #1e3a8a, #312e81);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(30,58,138,0.3);
 }
 
-.dialog-actions button:active {
-  transform: translateY(0); /* Reset lift effect on click */
+.dialog-actions button[type="submit"]:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
-button[color="warn"] {
-  background-color: #dc3545; /* Red for cancel button */
-  color: white;
+.dialog-actions button[color="warn"],
+.dialog-actions button[type="button"] {
+  background: #f1f5f9;
+  color: #374151;
 }
 
-button[color="warn"]:hover {
-  background-color: #b02a37; /* Darker red on hover */
+.dialog-actions button[color="warn"]:hover,
+.dialog-actions button[type="button"]:hover {
+  background: #e2e8f0;
+  transform: translateY(-1px);
 }
 
-/* Responsive Design */
 @media (max-width: 600px) {
   .update-task-container {
-    width: 95%; /* Use most of the screen width on smaller devices */
-    min-width: unset; /* Remove the minimum width for very small screens */
-    padding: 20px;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  button {
-    font-size: 0.9rem;
-    padding: 10px;
+    width: 95%;
+    min-width: unset;
+    padding: 24px 20px;
   }
 }

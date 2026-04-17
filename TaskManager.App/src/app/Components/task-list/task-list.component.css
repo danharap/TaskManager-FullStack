@@ -1,179 +1,138 @@
-/* Task List Container */
 .task-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  background-color: var(--secondary-color); /* Light mode background */
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  padding: 4px 2px;
 }
 
-html.dark-mode .task-list {
-  background-color: var(--background-color); /* Dark mode background */
-  color: var(--text-color); /* Dark mode text color */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Adjust shadow for dark mode */
-}
-
-/* Task Card */
 .task-card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  border: 1px solid var(--border-color); /* Light mode border */
-  border-radius: 8px;
-  background-color: var(--secondary-color); /* Light mode card background */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Ensure the title banner aligns with the card */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-html.dark-mode .task-card {
-  background-color: var(--background-color); /* Dark mode card background */
-  border: 1px solid var(--border-color); /* Dark mode border */
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .task-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.09);
 }
 
-/* Task Header (Title Banner) */
+/* Left border accent by priority */
+.priority-high  { border-left: 4px solid #ef4444; }
+.priority-medium { border-left: 4px solid #f59e0b; }
+.priority-low   { border-left: 4px solid #22c55e; }
+
 .task-header {
-  background-color: var(--th-color); /* Slightly darker shade of white */
-  padding: 10px 15px;
+  background-color: #f8fafc;
+  padding: 14px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--border-color); /* Add a subtle border for separation */
+  border-bottom: 1px solid #f1f5f9;
 }
-
-html.dark-mode .task-header {
-  background-color: var(--th-color); /* Slightly lighter shade for dark mode */
-}
-.task-actions .material-icons {
-  font-size: 18px;
-  vertical-align: middle;
-  margin-right: 4px;
-}
-
 
 .task-title {
   margin: 0;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--text-color); /* Light mode text color */
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.4;
 }
 
-html.dark-mode .task-title {
-  color: var(--text-color); /* Dark mode text color */
-}
-
-/* Priority Indicator */
 .priority-circle {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
+  flex-shrink: 0;
   margin-left: 10px;
 }
 
-.priority-high .priority-circle {
-  background-color: #dc3545; /* Red for high priority */
-}
+.priority-high  .priority-circle  { background-color: #ef4444; }
+.priority-medium .priority-circle { background-color: #f59e0b; }
+.priority-low   .priority-circle  { background-color: #22c55e; }
 
-.priority-medium .priority-circle {
-  background-color: #ffc107; /* Yellow for medium priority */
-}
-
-.priority-low .priority-circle {
-  background-color: #28a745; /* Green for low priority */
-}
-
-/* Task Body */
 .task-body {
-  padding: 15px;
-  font-size: 0.9rem;
-  color: var(--text-color); /* Light mode text color */
-}
-
-html.dark-mode .task-body {
-  color: var(--text-color); /* Dark mode text color */
+  padding: 14px 16px;
+  font-size: 0.875rem;
+  color: #374151;
+  flex: 1;
 }
 
 .task-description-box {
-  background-color: var(--secondary-color); /* Light mode description box */
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid var(--border-color);
-  margin-bottom: 10px;
-}
-
-html.dark-mode .task-description-box {
-  background-color: var(--background-color); /* Dark mode description box */
-  border: 1px solid var(--border-color); /* Dark mode border */
+  background-color: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #f1f5f9;
+  margin-bottom: 12px;
 }
 
 .task-description {
   margin: 0;
-  font-size: 1rem;
-  color: var(--text-color); /* Light mode text color */
-}
-
-html.dark-mode .task-description {
-  color: var(--text-color); /* Dark mode text color */
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.6;
 }
 
 .task-priority,
 .task-date,
 .task-status {
-  margin-bottom: 5px;
-  color: var(--text-color); /* Light mode text color */
+  margin-bottom: 4px;
+  color: #64748b;
+  font-size: 0.82rem;
 }
 
-html.dark-mode .task-priority,
-html.dark-mode .task-date,
-html.dark-mode .task-status {
-  color: var(--text-color); /* Dark mode text color */
+.status-completed {
+  color: #16a34a;
+  font-weight: 600;
 }
 
-/* Task Actions */
+.status-pending {
+  color: #d97706;
+  font-weight: 600;
+}
+
 .task-actions {
   display: flex;
-  gap: 10px;
+  gap: 6px;
   justify-content: flex-end;
-  padding: 10px 15px;
-  border-top: 1px solid var(--border-color); /* Light mode border */
+  padding: 10px 14px;
+  border-top: 1px solid #f1f5f9;
+  background-color: #fafafa;
 }
 
-html.dark-mode .task-actions {
-  border-top: 1px solid var(--border-color); /* Dark mode border */
-}
-
-button {
-  padding: 8px 12px;
-  background-color: var(--primary-color); /* Button background */
-  color: white; /* Button text color */
+.task-actions button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 8px;
   border: none;
-  border-radius: 5px;
-  font-size: 0.9rem;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.15s, transform 0.15s;
+  background-color: #f1f5f9;
+  color: #374151;
 }
 
-button:hover {
-  background-color: var(--hover-color); /* Hover effect */
-  transform: translateY(-2px); /* Slight lift effect */
+.task-actions button:hover {
+  background-color: #e2e8f0;
+  transform: translateY(-1px);
 }
 
-button:active {
-  transform: translateY(0); /* Reset lift effect on click */
+.task-actions button[color="warn"] {
+  background-color: #fef2f2;
+  color: #dc2626;
 }
 
-button[color="warn"] {
-  background-color: #dc3545; /* Red for delete button */
-  color: white;
+.task-actions button[color="warn"]:hover {
+  background-color: #fee2e2;
 }
 
-button[color="warn"]:hover {
-  background-color: #b02a37; /* Darker red on hover */
+.task-actions .material-icons {
+  font-size: 16px;
 }

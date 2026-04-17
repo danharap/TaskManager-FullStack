@@ -1,215 +1,263 @@
 .subtask-board-container {
-  padding: 40px 20px;
+  padding: 32px 28px;
   max-width: 1200px;
-  margin: 40px auto 0;
+  margin: 0 auto;
   font-family: 'Roboto', Arial, sans-serif;
-  background-color: var(--secondary-color);
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
 
-html.dark-mode .subtask-board-container {
-  background-color: var(--background-color);
-  color: var(--sidebar-text-color);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  color: #374151;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9px;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.back-btn:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  transform: none;
+}
+
+.back-btn .material-icons {
+  font-size: 16px;
 }
 
 h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
   text-align: center;
-  margin-bottom: 30px;
-  color: var(--primary-color);
 }
 
 .kanban-board {
   display: flex;
-  gap: 24px;
-  min-height: 400px;
+  gap: 16px;
+  align-items: flex-start;
 }
 
 .kanban-column {
   flex: 1;
-  background: var(--secondary-color);
-  border-radius: 10px;
-  padding: 18px 12px 12px 12px;
-  min-width: 260px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 12px 12px;
+  min-width: 240px;
   display: flex;
   flex-direction: column;
-  transition: background 0.3s;
-}
-
-html.dark-mode .kanban-column {
-  background: var(--background-color);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  color: var(--sidebar-text-color);
 }
 
 .kanban-column-header {
-  font-weight: bold;
-  font-size: 1.15rem;
-  margin-bottom: 16px;
-  color: var(--primary-color);
-  text-align: center;
-  letter-spacing: 1px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 14px;
+  padding: 0 4px;
 }
 
 .kanban-tasks {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 10px;
 }
 
 .kanban-task {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background: var(--background-color);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 10px;
-  padding: 18px 14px 14px 14px;
-  min-width: 260px;
-  min-height: 110px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 14px 12px 10px;
   position: relative;
-  margin-bottom: 8px;
-  transition: box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
-html.dark-mode .kanban-task {
-  background: var(--secondary-color);
-  color: var(--sidebar-text-color);
+.kanban-task:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+  transform: translateY(-2px);
 }
 
 .task-title {
-  font-size: 1.08rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  color: var(--text-color);
+  color: #0f172a;
   margin-bottom: 10px;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
+  display: block;
 }
 
-html.dark-mode .task-title {
-  color: var(--sidebar-text-color);
+.task-title:hover {
+  color: #1e3a8a;
 }
 
 .status-select {
-  width: 100%;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-  padding: 6px 10px;
-  font-size: 0.98rem;
-  background: var(--background-color);
-  color: var(--text-color);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  width: calc(100% - 36px);
+  max-width: 160px;
+  margin-bottom: 0;
+  border-radius: 7px;
+  border: 1.5px solid #e2e8f0;
+  padding: 5px 8px;
+  font-size: 0.82rem;
+  background: #f8fafc;
+  color: #374151;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
 }
 
 .status-select:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 5px var(--primary-color);
-}
-
-html.dark-mode .status-select {
-  background: var(--secondary-color);
-  color: var(--sidebar-text-color);
-  border: 1px solid var(--border-color);
+  border-color: #1e3a8a;
 }
 
 .delete-btn {
   position: absolute;
   right: 8px;
   bottom: 8px;
-  color: #dc3545;
+  color: #94a3b8;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.2rem;
-  border-radius: 50%;
+  font-size: 0;
+  border-radius: 6px;
   padding: 4px;
-  transition: background 0.2s;
+  transition: background 0.15s, color 0.15s;
 }
 
 .delete-btn:hover {
-  background: var(--hover-color);
-  color: #fff;
+  background: #fee2e2;
+  color: #dc2626;
+  transform: none;
+}
+
+.delete-btn .material-icons {
+  font-size: 16px;
 }
 
 .material-icons {
   font-family: 'Material Icons';
   font-style: normal;
-  font-weight: normal;
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
   display: inline-block;
-  direction: ltr;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Subtask View Dialog - Updated to match task dialogs */
+/* Add subtask form */
+.add-subtask-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.add-subtask-form input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9px;
+  background: #fff;
+  color: #0f172a;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.add-subtask-form input:focus {
+  border-color: #1e3a8a;
+  box-shadow: 0 0 0 3px rgba(30,58,138,0.1);
+}
+
+.add-subtask-form button {
+  background: linear-gradient(135deg, #1e3a8a, #312e81);
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 10px 20px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.15s;
+  box-shadow: 0 3px 10px rgba(30,58,138,0.28);
+}
+
+.add-subtask-form button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.add-subtask-form button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Subtask view dialog */
 .subtask-view-dialog {
   position: fixed;
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  bottom: 0;
-  background: rgba(0,0,0,0.5);
+  inset: 0;
+  background: rgba(15,23,42,0.45);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 24px;
 }
 
 .subtask-view-content {
-  background-color: var(--secondary-color);
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 600px;
-  min-width: 400px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  width: 100%;
+  max-width: 520px;
   max-height: 90vh;
   overflow-y: auto;
-  padding: 30px;
-  position: relative;
-  animation: dialogFadeIn 0.3s ease;
+  padding: 32px;
+  animation: dialogIn 0.2s ease;
 }
 
-@keyframes dialogFadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-html.dark-mode .subtask-view-content {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+@keyframes dialogIn {
+  from { opacity: 0; transform: translateY(-12px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .subtask-view-content h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
   text-align: center;
-  color: var(--text-color);
-  font-size: 1.8rem;
-  margin-bottom: 20px;
 }
 
 .subtask-view-content .form-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 14px;
 }
 
 .subtask-view-content label {
   display: flex;
   flex-direction: column;
-  font-size: 1rem;
-  color: var(--text-color);
-  margin-bottom: 5px;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
 }
 
 .subtask-view-content .checkbox-label {
@@ -218,238 +266,98 @@ html.dark-mode .subtask-view-content {
   gap: 10px;
 }
 
-.subtask-view-content .checkbox-label input[type="checkbox"] {
-  width: auto;
-  margin-left: 10px;
-}
-
 .subtask-view-content input,
 .subtask-view-content textarea,
 .subtask-view-content select {
-  padding: 12px;
-  font-size: 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  padding: 10px 13px;
+  font-size: 0.9rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9px;
   outline: none;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f8fafc;
+  color: #0f172a;
+  transition: border-color 0.2s, box-shadow 0.2s;
   width: 100%;
-}
-
-html.dark-mode .subtask-view-content input,
-html.dark-mode .subtask-view-content textarea,
-html.dark-mode .subtask-view-content select {
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
+  font-family: 'Roboto', Arial, sans-serif;
 }
 
 .subtask-view-content input:focus,
 .subtask-view-content textarea:focus,
 .subtask-view-content select:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 5px var(--primary-color);
+  border-color: #1e3a8a;
+  box-shadow: 0 0 0 3px rgba(30,58,138,0.1);
+  background-color: #fff;
 }
 
 .subtask-view-content textarea {
   resize: none;
-  height: 120px;
+  height: 110px;
 }
 
 .subtask-view-content .dialog-actions {
   display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 10px;
+  margin-top: 8px;
 }
 
 .subtask-view-content .dialog-actions button {
   flex: 1;
-  padding: 12px 20px;
-  background-color: var(--primary-color);
-  color: white;
+  padding: 11px;
+  border-radius: 9px;
+  font-size: 0.875rem;
+  font-weight: 600;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: opacity 0.15s, transform 0.15s;
+  background: linear-gradient(135deg, #1e3a8a, #312e81);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(30,58,138,0.28);
 }
 
 .subtask-view-content .dialog-actions button:hover {
-  background-color: var(--hover-color);
-  transform: translateY(-2px);
-}
-
-.subtask-view-content .dialog-actions button:active {
-  transform: translateY(0);
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .subtask-view-content .dialog-actions .cancel-btn {
-  background-color: #6c757d;
+  background: #f1f5f9;
+  color: #374151;
+  box-shadow: none;
 }
 
 .subtask-view-content .dialog-actions .cancel-btn:hover {
-  background-color: #5a6268;
+  background: #e2e8f0;
+  opacity: 1;
 }
 
 .subtask-view-content .dialog-actions .delete-btn {
-  background-color: #dc3545;
+  background: #fef2f2;
+  color: #dc2626;
+  box-shadow: none;
   position: static;
+  right: unset;
+  bottom: unset;
+  font-size: 0.875rem;
+  border-radius: 9px;
+  padding: 11px;
 }
 
 .subtask-view-content .dialog-actions .delete-btn:hover {
-  background-color: #c82333;
-}
-
-.add-subtask-form {
-  margin-top: 18px;
-  display: flex;
-  gap: 8px;
-}
-
-.add-subtask-form input {
-  flex: 1;
-  padding: 7px 10px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-  background: var(--background-color);
-  color: var(--text-color);
-  font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.add-subtask-form input:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 5px var(--primary-color);
-}
-
-html.dark-mode .add-subtask-form input {
-  background: var(--secondary-color);
-  color: var(--sidebar-text-color);
-  border: 1px solid var(--border-color);
-}
-
-.add-subtask-form button {
-  background: var(--primary-color);
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 7px 16px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.add-subtask-form button:hover {
-  background: var(--hover-color);
-  transform: translateY(-2px);
+  background: #fee2e2;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 900px) {
   .kanban-board {
     flex-direction: column;
-    gap: 18px;
+    gap: 12px;
   }
+
   .kanban-column {
     min-width: unset;
   }
-  .kanban-task {
-    min-width: unset;
-  }
+
   .subtask-view-content {
-    width: 95%;
-    min-width: unset;
-    padding: 20px;
+    padding: 24px 20px;
   }
-  .subtask-view-content h2 {
-    font-size: 1.5rem;
-  }
-  .subtask-view-content .dialog-actions button {
-    font-size: 0.9rem;
-    padding: 10px;
-  }
-}
-
-.edit-subtask-form {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  background: var(--background-color);
-  padding: 10px;
-  border-radius: 6px;
-}
-
-.edit-subtask-form input,
-.edit-subtask-form textarea {
-  padding: 5px;
-  border-radius: 3px;
-  border: 1px solid var(--border-color);
-  background: var(--secondary-color);
-  color: var(--text-color);
-}
-
-html.dark-mode .edit-subtask-form input,
-html.dark-mode .edit-subtask-form textarea {
-  background: var(--background-color);
-  color: var(--sidebar-text-color);
-}
-
-.task-title .completed {
-  text-decoration: line-through;
-  color: #888;
-}
-
-.status-select {
-  width: 70%; /* Reduced width so it doesn't cover the delete button */
-  min-width: 100px;
-  max-width: 160px;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-  padding: 6px 10px;
-  font-size: 0.98rem;
-  background: var(--background-color);
-  color: var(--text-color);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.status-select:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 5px var(--primary-color);
-}
-
-html.dark-mode .status-select {
-  background: var(--secondary-color);
-  color: var(--sidebar-text-color);
-  border: 1px solid var(--border-color);
-}
-
-.back-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--primary-color);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 18px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-bottom: 18px;
-  margin-top: 0;
-  transition: background 0.2s, transform 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.back-btn .material-icons {
-  font-size: 1.2rem;
-  margin-right: 6px;
-}
-
-.back-btn:hover {
-  background: var(--hover-color);
-  transform: translateY(-2px);
 }

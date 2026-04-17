@@ -1,143 +1,133 @@
 .notifications-container {
-  max-width: 600px;
-  margin: 40px auto;
-  background: var(--secondary-color);
-  border-radius: 12px;
-  padding: 32px 28px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  max-width: 680px;
+  margin: 32px auto;
   font-family: 'Roboto', Arial, sans-serif;
 }
 
-html.dark-mode .notifications-container {
-  background: var(--background-color);
-  color: var(--sidebar-text-color);
-}
-
 .notifications-container h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
   margin-bottom: 24px;
-  color: var(--primary-color);
   text-align: center;
-  font-size: 2rem;
 }
 
 .notifications-container ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .notifications-container li {
   border-radius: 12px;
-  margin-bottom: 18px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  display: flex;
-  align-items: center;
-  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
 }
 
 .notification-content {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 20px 24px;
-  gap: 18px;
+  padding: 16px 20px;
+  gap: 14px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
 }
 
 .notification-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 48px;
-  min-height: 48px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  font-size: 0;
+}
+
+.notification-icon .material-icons {
+  font-size: 18px;
 }
 
 .notification-created {
-  background: #1976d2;
-  color: #fff;
+  background: #dbeafe;
+  color: #1e40af;
 }
 
 .notification-deleted {
-  background: #e53935;
-  color: #fff;
+  background: #fee2e2;
+  color: #dc2626;
 }
 
 .notification-updated {
-  background: #ffa726;
-  color: #fff;
+  background: #fef3c7;
+  color: #d97706;
 }
 
 .notification-default {
-  background: #607d8b;
-  color: #fff;
-}
-
-.notification-title {
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 2px;
+  background: #f1f5f9;
+  color: #475569;
 }
 
 .notification-text {
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 2px;
+}
+
+.notification-title {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: #0f172a;
 }
 
 .notification-message {
-  font-size: 0.98rem;
-  opacity: 0.95;
+  font-size: 0.825rem;
+  color: #64748b;
+  line-height: 1.5;
 }
 
 .notification-date {
-  font-size: 0.95rem;
-  opacity: 0.85;
-  min-width: 70px;
-  text-align: right;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  white-space: nowrap;
 }
 
 .empty-state {
-  color: #888;
   text-align: center;
-  margin: 32px 0;
-  font-size: 1.1rem;
-}
-
-@media (max-width: 700px) {
-  .notifications-container {
-    padding: 18px 6px;
-    max-width: 98vw;
-  }
-}
-
-.notification-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  margin: 48px 0;
+  font-size: 0.95rem;
+  color: #94a3b8;
 }
 
 .delete-button {
   background: transparent;
   border: none;
-  color: rgba(255,255,255,0.7);
+  color: #94a3b8;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
-  border-radius: 50%;
-  transition: background-color 0.2s, color 0.2s;
+  padding: 5px;
+  border-radius: 6px;
+  transition: background-color 0.15s, color 0.15s;
+  flex-shrink: 0;
 }
 
 .delete-button:hover {
-  background-color: rgba(255,255,255,0.2);
-  color: #fff;
+  background-color: #fee2e2;
+  color: #dc2626;
+  transform: none;
 }
 
 .delete-button .material-icons {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .notification-clear-all {
@@ -146,15 +136,27 @@ html.dark-mode .notifications-container {
 }
 
 .notification-clear-all button {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  background: transparent;
+  color: #64748b;
+  border: 1.5px solid #e2e8f0;
+  padding: 9px 20px;
+  border-radius: 9px;
+  font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
 
 .notification-clear-all button:hover {
-  background: var(--hover-color);
+  border-color: #ef4444;
+  color: #dc2626;
+  background: #fef2f2;
+  transform: none;
+}
+
+@media (max-width: 700px) {
+  .notifications-container {
+    padding: 0 16px;
+    max-width: 100%;
+  }
 }
