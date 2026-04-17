@@ -1,55 +1,78 @@
 <div class="sidebar">
   <div class="sidebar-header">
-    <h2>Angular Task App</h2>
+    <div class="sidebar-logo">
+      <mat-icon class="logo-icon">check_circle</mat-icon>
+      <span class="logo-text">TaskManager</span>
+    </div>
   </div>
+
   <nav class="sidebar-nav">
+    <p class="nav-section-label">Main</p>
     <ul>
       <li>
         <a routerLink="/dashboard" routerLinkActive="active">
-          <i class="icon">📋</i> Tasks
-        </a>
-      </li>
-      <li>
-        <a routerLink="/settings" routerLinkActive="active">
-          <i class="icon">⚙️</i> Settings
+          <mat-icon>dashboard</mat-icon>
+          <span>Dashboard</span>
         </a>
       </li>
       <li>
         <a routerLink="/calendar" routerLinkActive="active">
-          <i class="icon">📅</i> Calendar
+          <mat-icon>calendar_today</mat-icon>
+          <span>Calendar</span>
         </a>
       </li>
       <li>
         <a routerLink="/analytics" routerLinkActive="active">
-          <i class="icon">📊</i> Analytics
+          <mat-icon>bar_chart</mat-icon>
+          <span>Analytics</span>
         </a>
       </li>
       <li>
         <a routerLink="/notifications" routerLinkActive="active">
-          <i class="icon">🔔</i> Notifications
-        </a>
-      </li>
-
-      <li>
-      <a routerLink="/help" routerLinkActive="active">
-        <i class="icon">❓</i> Help & Info
-      </a>
-    </li>
-    <li>
-      <a routerLink="/developer-docs" routerLinkActive="active">
-        <i class="icon">🌐</i> Developer Docs
-      </a>
-    </li>
-      <li *ngIf="userRole === 'Admin'">
-        <a routerLink="/admin" [queryParams]="{ view: 'tasks' }" routerLinkActive="active">
-          <i class="icon">🛠️</i> Manage Tasks
-        </a>
-      </li>
-      <li *ngIf="userRole === 'Admin'">
-        <a routerLink="/admin" [queryParams]="{ view: 'users' }" routerLinkActive="active">
-          <i class="icon">👥</i> Manage Users
+          <mat-icon>notifications_none</mat-icon>
+          <span>Notifications</span>
         </a>
       </li>
     </ul>
+
+    <p class="nav-section-label">Account</p>
+    <ul>
+      <li>
+        <a routerLink="/settings" routerLinkActive="active">
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/help" routerLinkActive="active">
+          <mat-icon>help_outline</mat-icon>
+          <span>Help & Info</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/developer-docs" routerLinkActive="active">
+          <mat-icon>code</mat-icon>
+          <span>Developer Docs</span>
+        </a>
+      </li>
+    </ul>
+
+    <ng-container *ngIf="userRole === 'Admin'">
+      <p class="nav-section-label">Admin</p>
+      <ul>
+        <li>
+          <a routerLink="/admin" [queryParams]="{ view: 'tasks' }" routerLinkActive="active">
+            <mat-icon>task_alt</mat-icon>
+            <span>Manage Tasks</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin" [queryParams]="{ view: 'users' }" routerLinkActive="active">
+            <mat-icon>manage_accounts</mat-icon>
+            <span>Manage Users</span>
+          </a>
+        </li>
+      </ul>
+    </ng-container>
   </nav>
 </div>
