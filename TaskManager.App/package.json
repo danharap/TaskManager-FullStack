@@ -1,10 +1,11 @@
 {
   "name": "fullstack-app",
-  "version": "0.0.0",  "scripts": {
+  "version": "0.0.0",
+  "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration production",
-    "vercel-build": "ng build --configuration production",
+    "vercel-build": "node scripts/generate-env.js && ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint:css": "stylelint \"src/**/*.css\""
@@ -23,6 +24,7 @@
     "@angular/router": "^18.0.0",
     "@ngx-translate/core": "^16.0.4",
     "@ngx-translate/http-loader": "^16.0.1",
+    "@supabase/supabase-js": "^2.103.3",
     "angular-calendar": "^0.31.1",
     "date-fns": "^4.1.0",
     "gapi-script": "^1.2.0",

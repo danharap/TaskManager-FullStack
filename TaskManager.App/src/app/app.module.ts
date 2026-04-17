@@ -10,8 +10,6 @@ import { TaskListComponent } from './Components/task-list/task-list.component';
 import { CreateTaskComponent } from './Components/create-task/create-task.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './services/auth.interceptor';
 import { AdminComponent } from './Components/admin/admin.component';
 import { BannerComponent } from './Components/banner/banner.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
@@ -81,11 +79,15 @@ export function HttpLoaderFactory(http: HttpClient) {
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    TranslateModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,19 +2,20 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  email = '';
   username = '';
   password = '';
   message = '';
   isLoading = false;
 
   constructor(private authService: AuthService, private router: Router, private location: Location) {
-    // Show spinner during route changes (register <-> login)
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         this.isLoading = true;
@@ -30,22 +31,23 @@ export class RegisterComponent {
 
   onRegister() {
     this.isLoading = true;
-    this.authService.register(this.username, this.password).subscribe({
+    this.authService.register(this.email, this.password, this.username).subscribe({
       next: () => {
-        this.authService.login(this.username, this.password).subscribe({
+        // After sign-up, log the user in automatically
+        this.authService.login(this.email, this.password).subscribe({
           next: () => {
             this.isLoading = false;
             this.router.navigate(['/dashboard']);
           },
           error: () => {
             this.isLoading = false;
-            this.message = 'Registration successful, but login failed. Please try logging in manually.';
+            this.message = 'Registration successful! Please check your email to confirm your account, then log in.';
           }
         });
       },
-      error: err => {
+      error: (err: any) => {
         this.isLoading = false;
-        this.message = err.error?.Message || 'Registration failed.';
+        this.message = err.message || 'Registration failed.';
       }
     });
   }
@@ -53,5 +55,4 @@ export class RegisterComponent {
   goBack(): void {
     this.location.back();
   }
-
 }

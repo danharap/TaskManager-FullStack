@@ -1,15 +1,14 @@
-// filepath: src/app/models/task.model.ts
 export interface SubTaskModel {
-  id: number;
+  id: string;
   title: string;
   description: string;
   isCompleted: boolean;
-  taskId: number;
+  taskId: string;
   status: string;
 }
 
 export interface TaskModel {
-  id: number;
+  id: string;
   title: string;
   description: string;
   isCompleted: boolean;

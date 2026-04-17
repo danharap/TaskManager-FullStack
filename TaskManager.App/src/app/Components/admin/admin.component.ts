@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { TaskModel } from '../../models/task.model';
 import { UpdateUsernameDialogComponent } from '../update-username-dialog/update-username-dialog.component';
 import { UpdateRoleDialogComponent } from '../update-role-dialog/update-role-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { environment } from '../../../environments/environment';
+import { SupabaseService } from '../../services/supabase.service';
 
-interface User {
-  id: number;
+export interface ProfileUser {
+  id: string;
   username: string;
-  passwordHash: string;
   role: string;
 }
 
@@ -20,22 +18,23 @@ interface User {
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  users: User[] = [];
+  users: ProfileUser[] = [];
   tasks: TaskModel[] = [];
-  isTaskView: boolean = false; // Toggle between User Management and Task Management
-  newRole: string = '';
-  newUsername: string = '';
+  isTaskView: boolean = false;
   userRole: string | null = null;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private dialog: MatDialog) {}
+  constructor(
+    private supabaseService: SupabaseService,
+    private route: ActivatedRoute,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.userRole = localStorage.getItem('userRole');
 
-    // Listen for query parameter changes
     this.route.queryParams.subscribe((params) => {
       const view = params['view'];
-      this.isTaskView = view === 'tasks'; // Toggle based on the query parameter
+      this.isTaskView = view === 'tasks';
       if (this.isTaskView) {
         this.getAllTasks();
       } else {
@@ -44,100 +43,79 @@ export class AdminComponent implements OnInit {
     });
   }
 
-    openUpdateUsernameDialog(user: User) {
+  openUpdateUsernameDialog(user: ProfileUser) {
     const dialogRef = this.dialog.open(UpdateUsernameDialogComponent, {
       width: '400px',
       data: { user }
     });
-
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getAllUsers(); // Refresh the user list after updating
-      }
+      if (result) this.getAllUsers();
     });
   }
 
-  // Open Update Role Dialog
-  openUpdateRoleDialog(user: User) {
+  openUpdateRoleDialog(user: ProfileUser) {
     const dialogRef = this.dialog.open(UpdateRoleDialogComponent, {
       width: '400px',
       data: { user }
     });
-
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getAllUsers(); // Refresh the user list after updating
-      }
+      if (result) this.getAllUsers();
     });
   }
-  // Fetch all users
+
   getAllUsers() {
-    this.http.get<User[]>(`${environment.apiUrl}/auth/users`).subscribe({
-      next: (users) => (this.users = users),
-      error: (err) => console.error('Failed to fetch users:', err)
-    });
+    this.supabaseService.client
+      .from('profiles')
+      .select('id, username, role')
+      .then(({ data, error }) => {
+        if (error) { console.error('Failed to fetch users:', error); return; }
+        this.users = data ?? [];
+      });
   }
 
-  // Fetch all tasks
   getAllTasks() {
-    this.http.get<TaskModel[]>(`${environment.apiUrl}/tasks/all`).subscribe({
-      next: (tasks) => (this.tasks = tasks),
-      error: (err) => alert('Failed to fetch tasks')
-    });
+    this.supabaseService.client
+      .from('tasks')
+      .select('*, subtasks(*)')
+      .order('created_at', { ascending: false })
+      .then(({ data, error }) => {
+        if (error) { alert('Failed to fetch tasks'); return; }
+        this.tasks = (data ?? []).map((row: any) => ({
+          id: row.id,
+          title: row.title,
+          description: row.description ?? '',
+          isCompleted: row.is_completed,
+          priority: row.priority,
+          plannedCompletionDate: row.planned_completion_date ? new Date(row.planned_completion_date) : new Date(),
+          createdAt: new Date(row.created_at),
+          subTasks: row.subtasks ?? []
+        }));
+      });
   }
-  // Update a user's username
-  updateUsername(user: User) {
-    if (!this.newUsername) {
-      alert('New username cannot be empty.');
-      return;
-    }
 
-    this.http.put(`${environment.apiUrl}/auth/admin/users/${user.id}/username`, { newUsername: this.newUsername }).subscribe({
-      next: () => {
-        user.username = this.newUsername;
-        this.newUsername = '';
-        alert('Username updated successfully');
-      },
-      error: (err) => alert('Failed to update username')
-    });
-  }
-  // Update a user's role
-  setRole(user: User) {
-    if (!this.newRole) return;
-
-    this.http.put(`${environment.apiUrl}/auth/users/${user.id}/role`, this.newRole).subscribe({
-      next: () => {
-        user.role = this.newRole;
-        this.newRole = '';
-        alert('Role updated');
-      },
-      error: (err) => alert('Failed to update role')
-    });
-  }
-  // Delete a user
-  deleteUser(id: number) {
+  deleteUser(id: string) {
     if (confirm('Are you sure you want to delete this user and all their tasks?')) {
-      this.http.delete(`${environment.apiUrl}/auth/users/${id}`).subscribe({
-        next: () => {
+      this.supabaseService.client
+        .rpc('admin_delete_user', { target_user_id: id })
+        .then(({ error }) => {
+          if (error) { alert('Failed to delete user: ' + error.message); return; }
           this.users = this.users.filter((u) => u.id !== id);
           alert('User deleted');
-        },
-        error: (err) => alert('Failed to delete user')
-      });
+        });
     }
   }
-  // Delete a task
-  deleteTask(id: number) {
-  if (confirm('Are you sure you want to delete this task?')) {
-    this.http.delete(`${environment.apiUrl}/tasks/${id}`).subscribe({
-      next: () => {
-        this.tasks = this.tasks.filter((task) => task.id !== id);
-        alert('Task deleted');
-      },
-      error: (err) => {
-        alert(err.error?.Message || 'Failed to delete task');
-      }
-    });
+
+  deleteTask(id: string) {
+    if (confirm('Are you sure you want to delete this task?')) {
+      this.supabaseService.client
+        .from('tasks')
+        .delete()
+        .eq('id', id)
+        .then(({ error }) => {
+          if (error) { alert('Failed to delete task: ' + error.message); return; }
+          this.tasks = this.tasks.filter((t) => t.id !== id);
+          alert('Task deleted');
+        });
+    }
   }
-}
 }

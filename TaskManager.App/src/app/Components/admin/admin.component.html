@@ -7,7 +7,7 @@
         <tr>
           <th>ID</th>
           <th>Username</th>
-          <th>Password Hash</th>
+
           <th>Role</th>
           <th>Actions</th>
         </tr>
@@ -16,7 +16,7 @@
         <tr *ngFor="let user of users">
           <td>{{ user.id }}</td>
           <td>{{ user.username }}</td>
-          <td>{{ user.passwordHash }}</td>
+
           <td>{{ user.role }}</td>
           <td class="actions-column">
             <button (click)="openUpdateUsernameDialog(user)" class="update-button">

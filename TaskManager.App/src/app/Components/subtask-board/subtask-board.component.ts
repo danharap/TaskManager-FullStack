@@ -13,9 +13,9 @@ import { ToastService } from '../../services/toast.service';
   styleUrls: ['./subtask-board.component.css']
 })
 export class SubtaskBoardComponent implements OnInit {
-  taskId!: number;
+  taskId!: string;
   subtasks: SubTaskModel[] = [];
-  editingSubtaskId: number | null = null;
+  editingSubtaskId: string | null = null;
   editSubtaskData: Partial<SubTaskModel> = {};
   statuses = ['To Do', 'In Progress', 'In Review', 'Complete'];
   newSubTaskTitle = '';
@@ -24,7 +24,7 @@ export class SubtaskBoardComponent implements OnInit {
   constructor(private route: ActivatedRoute, private taskService: TaskService, private location: Location, private notificationService: NotificationService, private toastService: ToastService ) {}
 
   ngOnInit() {
-    this.taskId = +this.route.snapshot.paramMap.get('id')!;
+    this.taskId = this.route.snapshot.paramMap.get('id')!;
     this.loadSubTasks();
   }
 
@@ -86,7 +86,7 @@ saveViewingSubtask() {
 addSubTask() {
   if (!this.newSubTaskTitle.trim()) return;
   const subTask: SubTaskModel = {
-    id: 0,
+    id: '',
     title: this.newSubTaskTitle,
     description: '',
     isCompleted: false,

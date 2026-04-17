@@ -20,7 +20,7 @@ export class TaskDialogComponent {
     } else {
       this.isNewTask = true;
       this.task = {
-        id: 0,
+        id: '',
         title: '',
         description: '',
         priority: 'Medium',

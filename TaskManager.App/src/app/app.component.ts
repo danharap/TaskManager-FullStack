@@ -99,7 +99,7 @@ export class AppComponent implements OnInit {
 
   addTask() {
     const newTask: TaskModel = {
-      id: 0, // Backend will assign the ID
+      id: '', // Supabase will assign the UUID
       title: 'New Task',
       description: 'This is a new task',
       isCompleted: false,
@@ -119,7 +119,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  deleteTask(id: number) {
+  deleteTask(id: string) {
     this.taskService.deleteTask(id).subscribe({
       next: () => {
         this.tasks = this.tasks.filter(task => task.id !== id);

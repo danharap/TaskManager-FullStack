@@ -8,7 +8,7 @@ import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationErr
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username = '';
+  email = '';
   password = '';
   message = '';
   isLoading = false;
@@ -30,7 +30,7 @@ export class LoginComponent {
 
   onLogin() {
     this.isLoading = true;
-    this.authService.login(this.username, this.password).subscribe({
+    this.authService.login(this.email, this.password).subscribe({
       next: () => {
         this.isLoading = false;
         this.router.navigate(['/dashboard']);

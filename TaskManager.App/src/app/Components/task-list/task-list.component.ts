@@ -10,7 +10,7 @@ export class TaskListComponent {
   @Input() tasks: TaskModel[] = [];
   @Input() searchQuery: string = '';
   @Output() editTask = new EventEmitter<TaskModel>();
-  @Output() deleteTask = new EventEmitter<number>();
+  @Output() deleteTask = new EventEmitter<string>();
   @Output() viewSubTasks = new EventEmitter<TaskModel>();
 
   get filteredTasks() {
@@ -23,7 +23,7 @@ onEditTask(task: TaskModel) {
   this.editTask.emit(task);
 }
 
-  onDeleteTask(id: number) {
+  onDeleteTask(id: string) {
     this.deleteTask.emit(id);
   }
 }

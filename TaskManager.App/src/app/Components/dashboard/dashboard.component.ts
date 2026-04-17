@@ -118,7 +118,7 @@ onEditTask(task: TaskModel) {
   });
 }
 
-onDeleteTask(id: number) {
+onDeleteTask(id: string) {
   const task = this.tasks.find(t => t.id === id);
   this.taskService.deleteTask(id).subscribe({
     next: () => {

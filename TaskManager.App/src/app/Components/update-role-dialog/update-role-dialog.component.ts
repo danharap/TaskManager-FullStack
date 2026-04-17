@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { SupabaseService } from '../../services/supabase.service';
 
 @Component({
   selector: 'app-update-role-dialog',
@@ -13,25 +12,26 @@ export class UpdateRoleDialogComponent {
 
   constructor(
     private dialogRef: MatDialogRef<UpdateRoleDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { user: any },
-    private http: HttpClient
+    @Inject(MAT_DIALOG_DATA) public data: { user: { id: string; role: string } },
+    private supabaseService: SupabaseService
   ) {}
+
   updateRole() {
-  this.http.put(`${environment.apiUrl}/auth/users/${this.data.user.id}/role`, `"${this.newRole}"`, {
-    headers: { 'Content-Type': 'application/json' } // Ensure the Content-Type is set to JSON
-  }).subscribe({
-    next: () => {
-      alert('Role updated successfully');
-      this.dialogRef.close(true); // Close the dialog and notify success
-    },
-    error: (err) => {
-      console.error('Failed to update role:', err);
-      alert(err.error?.Message || 'Failed to update role');
-    }
-  });
-}
+    this.supabaseService.client
+      .from('profiles')
+      .update({ role: this.newRole })
+      .eq('id', this.data.user.id)
+      .then(({ error }) => {
+        if (error) {
+          alert(error.message || 'Failed to update role');
+          return;
+        }
+        alert('Role updated successfully');
+        this.dialogRef.close(true);
+      });
+  }
 
   cancel() {
-    this.dialogRef.close(false); // Close the dialog without saving
+    this.dialogRef.close(false);
   }
 }

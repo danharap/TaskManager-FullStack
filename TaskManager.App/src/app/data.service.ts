@@ -1,39 +1,34 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TaskModel } from './models/task.model'; // Import the TaskModel
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
+import { TaskService } from './services/task.service';
+import { TaskModel } from './models/task.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+/**
+ * Thin delegation layer kept for backward compatibility.
+ * Components that previously imported DataService continue to work;
+ * all logic is now handled by TaskService + Supabase.
+ */
+@Injectable({ providedIn: 'root' })
 export class DataService {
-  private apiUrl = `${environment.apiUrl}/tasks`; // Backend URL for tasks
+  constructor(private taskService: TaskService) {}
 
-  constructor(private http: HttpClient) {}
-
-  // Get all tasks
   getTasks(): Observable<TaskModel[]> {
-    return this.http.get<TaskModel[]>(this.apiUrl);
+    return this.taskService.getTasks();
   }
 
-  // Get a task by ID
-  getTaskById(id: number): Observable<TaskModel> {
-    return this.http.get<TaskModel>(`${this.apiUrl}/${id}`);
+  getTaskById(id: string): Observable<TaskModel> {
+    return this.taskService.getTaskById(id);
   }
 
-  // Add a new task
-  addTask(task: TaskModel): Observable<TaskModel> {
-    return this.http.post<TaskModel>(this.apiUrl, task);
+  addTask(task: Partial<TaskModel>): Observable<TaskModel> {
+    return this.taskService.addTask(task);
   }
 
-  // Update an existing task
-  updateTask(id: number, task: TaskModel): Observable<TaskModel> {
-    return this.http.put<TaskModel>(`${this.apiUrl}/${id}`, task);
+  updateTask(id: string, task: Partial<TaskModel>): Observable<TaskModel> {
+    return this.taskService.updateTask(id, task);
   }
 
-  // Delete a task
-  deleteTask(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  deleteTask(id: string): Observable<void> {
+    return this.taskService.deleteTask(id);
   }
 }

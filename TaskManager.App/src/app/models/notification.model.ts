@@ -1,7 +1,7 @@
 export interface NotificationModel {
-  id: number;
-  userId: number;
-  type: string; // e.g., "TaskCreated", "FileUploaded", etc.
+  id: string;
+  userId: string;
+  type: string;
   message: string;
   createdAt: string;
   isRead: boolean;
