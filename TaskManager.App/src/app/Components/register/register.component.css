@@ -116,3 +116,14 @@ input:focus {
 .switch-auth a:hover {
   text-decoration: underline;
 }
+.back-home {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 0.82rem;
+}
+.back-home a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.back-home a:hover { color: #374151; }

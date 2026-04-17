@@ -35,6 +35,7 @@ import { NotificationsComponent } from './Components/notifications/notifications
 import { ToastComponent } from './Components/toast/toast.component';
 import { HelpComponent } from './Components/help/help.component';
 import { DeveloperDocsComponent } from './Components/developer-docs/developer-docs.component';
+import { LandingComponent } from './Components/landing/landing.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -66,6 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToastComponent,
     HelpComponent,
     DeveloperDocsComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,

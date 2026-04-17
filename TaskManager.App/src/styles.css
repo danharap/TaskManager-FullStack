@@ -102,7 +102,7 @@ main {
 }
 
 .main-content.sidebar-visible {
-  margin-left: 300px; /* Matches the sidebar width */
+  margin-left: 240px; /* Matches the sidebar width */
 }
 
 html.auth-page .main-content {

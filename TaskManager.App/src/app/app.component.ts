@@ -67,9 +67,13 @@ export class AppComponent implements OnInit {
     });
   }
 
+  isLandingPage(): boolean {
+    return this.router.url === '/' || this.router.url === '';
+  }
+
   isAuthPage(): boolean {
     const authPages = ['/login', '/register'];
-    return authPages.includes(this.router.url);
+    return authPages.includes(this.router.url) || this.isLandingPage();
   }
 
   getTasks() {

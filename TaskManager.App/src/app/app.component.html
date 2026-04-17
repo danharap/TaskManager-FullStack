@@ -1,12 +1,21 @@
 <app-toast></app-toast>
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-<div class="app-container" [class.auth-page]="isAuthPage()">
-  <app-banner></app-banner>
-  <div class="main-content" [class.sidebar-visible]="!isAuthPage()">
-    <div class="content">
-      <router-outlet></router-outlet>
+
+<!-- Full-page routes: landing, login, register — no app shell -->
+<ng-container *ngIf="isAuthPage(); else appShell">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<!-- App shell: authenticated routes get banner, sidebar, FAB -->
+<ng-template #appShell>
+  <div class="app-container">
+    <app-banner></app-banner>
+    <div class="main-content sidebar-visible">
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+      <app-sidebar></app-sidebar>
     </div>
-    <app-sidebar *ngIf="!isAuthPage()"></app-sidebar>
+    <app-fab-create-task (createClicked)="openCreateTaskDialog()"></app-fab-create-task>
   </div>
-  <app-fab-create-task *ngIf="!isAuthPage()" (createClicked)="openCreateTaskDialog()"></app-fab-create-task>
-</div>
+</ng-template>

@@ -1,0 +1,337 @@
+<!-- ─── STICKY NAV ─── -->
+<header class="nav" [class.nav-scrolled]="navScrolled">
+  <div class="nav-inner">
+    <a class="nav-logo" (click)="scrollTo('hero')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      TaskManager
+    </a>
+
+    <nav class="nav-links" [class.open]="mobileMenuOpen">
+      <a (click)="scrollTo('features')">Features</a>
+      <a (click)="scrollTo('pricing')">Pricing</a>
+      <a (click)="scrollTo('reviews')">Reviews</a>
+      <a (click)="scrollTo('faq')">FAQ</a>
+      <button class="btn-ghost" (click)="goToLogin()">Sign In</button>
+      <button class="btn-primary-sm" (click)="goToRegister()">Get Started</button>
+    </nav>
+
+    <button class="hamburger" (click)="mobileMenuOpen = !mobileMenuOpen" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Free to start · No credit card required</div>
+    <h1 class="hero-headline">Your tasks, organized.<br>Your goals, achieved.</h1>
+    <p class="hero-sub">
+      A clean, fast task manager with subtasks, priorities, due dates,
+      calendar views, and real-time notifications — all powered by Supabase.
+    </p>
+    <div class="hero-ctas">
+      <button class="btn-hero-primary" (click)="goToRegister()">Get Started Free</button>
+      <button class="btn-hero-ghost" (click)="goToLogin()">Sign In →</button>
+    </div>
+  </div>
+
+  <!-- App preview mock -->
+  <div class="hero-preview">
+    <div class="mock-window">
+      <div class="mock-bar">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="mock-url">task-manager-eta-orcin.vercel.app/dashboard</span>
+      </div>
+      <div class="mock-body">
+        <div class="mock-sidebar">
+          <div class="mock-logo-row">
+            <div class="mock-logo-dot"></div>
+            <div class="mock-logo-text"></div>
+          </div>
+          <div class="mock-nav-item active"></div>
+          <div class="mock-nav-item"></div>
+          <div class="mock-nav-item"></div>
+          <div class="mock-nav-item"></div>
+        </div>
+        <div class="mock-main">
+          <div class="mock-toolbar">
+            <div class="mock-search"></div>
+            <div class="mock-btn-add"></div>
+          </div>
+          <div class="mock-task high">
+            <div class="mock-task-check"></div>
+            <div class="mock-task-info">
+              <div class="mock-task-title"></div>
+              <div class="mock-task-meta"></div>
+            </div>
+            <div class="mock-badge high-badge">High</div>
+          </div>
+          <div class="mock-task medium">
+            <div class="mock-task-check done"></div>
+            <div class="mock-task-info">
+              <div class="mock-task-title done"></div>
+              <div class="mock-task-meta"></div>
+            </div>
+            <div class="mock-badge medium-badge">Medium</div>
+          </div>
+          <div class="mock-task low">
+            <div class="mock-task-check"></div>
+            <div class="mock-task-info">
+              <div class="mock-task-title"></div>
+              <div class="mock-task-meta"></div>
+            </div>
+            <div class="mock-badge low-badge">Low</div>
+          </div>
+          <div class="mock-task medium">
+            <div class="mock-task-check"></div>
+            <div class="mock-task-info">
+              <div class="mock-task-title short"></div>
+              <div class="mock-task-meta"></div>
+            </div>
+            <div class="mock-badge medium-badge">Medium</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURES ─── -->
+<section class="section features-section" id="features">
+  <div class="section-inner">
+    <p class="section-eyebrow">Everything you need</p>
+    <h2 class="section-title">Built for focus, not friction</h2>
+    <p class="section-sub">Every feature in TaskManager maps to something real in the app — nothing is vaporware.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>Task Management</h3>
+        <p>Create, edit, and organize tasks with priority levels (Low / Medium / High), planned completion dates, and rich descriptions.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon indigo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="5" height="18" rx="1"/><rect x="10" y="3" width="5" height="12" rx="1"/><rect x="17" y="3" width="5" height="15" rx="1"/></svg>
+        </div>
+        <h3>Subtask Kanban Board</h3>
+        <p>Break any task into subtasks and track them through a full Kanban board: To Do → In Progress → In Review → Complete.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon violet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h3>Calendar View</h3>
+        <p>Visualize all your tasks on a monthly calendar. See what's due this week at a glance and plan your workload without surprises.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon sky">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3>Analytics Dashboard</h3>
+        <p>Track total tasks, completion rate, overdue count, and priority distribution — with live data pulled directly from your account.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <h3>Real-Time Notifications</h3>
+        <p>Receive in-app notifications whenever tasks or subtasks are created, updated, deleted, or change status — plus persistent toast alerts.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon rose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Admin Panel</h3>
+        <p>Admin accounts can view all users and tasks, update roles and usernames, and delete accounts — with a full management interface.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ─── -->
+<section class="section pricing-section" id="pricing">
+  <div class="section-inner">
+    <p class="section-eyebrow">Pricing</p>
+    <h2 class="section-title">Simple, transparent plans</h2>
+    <p class="section-sub pricing-note">Example pricing for portfolio demo purposes · Billing not yet implemented</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <p class="tier-name">Free</p>
+        <p class="tier-price">$0<span>/mo</span></p>
+        <p class="tier-desc">Perfect for personal use and getting started.</p>
+        <ul class="tier-features">
+          <li><span class="check">✓</span> Up to 50 tasks</li>
+          <li><span class="check">✓</span> Subtask boards</li>
+          <li><span class="check">✓</span> Calendar view</li>
+          <li><span class="check">✓</span> Basic analytics</li>
+          <li><span class="check">✓</span> Notifications</li>
+          <li class="muted"><span>–</span> Priority support</li>
+        </ul>
+        <button class="btn-tier-outline" (click)="goToRegister()">Get started free</button>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="popular-badge">Most Popular</div>
+        <p class="tier-name">Pro</p>
+        <p class="tier-price">$9<span>/mo</span></p>
+        <p class="tier-desc">For power users who need unlimited capacity.</p>
+        <ul class="tier-features">
+          <li><span class="check">✓</span> Unlimited tasks</li>
+          <li><span class="check">✓</span> Subtask boards</li>
+          <li><span class="check">✓</span> Calendar view</li>
+          <li><span class="check">✓</span> Advanced analytics</li>
+          <li><span class="check">✓</span> Notifications</li>
+          <li><span class="check">✓</span> Priority support</li>
+        </ul>
+        <button class="btn-tier-primary" (click)="goToRegister()">Start with Pro</button>
+      </div>
+
+      <div class="pricing-card">
+        <p class="tier-name">Team</p>
+        <p class="tier-price">$29<span>/mo</span></p>
+        <p class="tier-desc">For teams that need shared workspace and admin tools.</p>
+        <ul class="tier-features">
+          <li><span class="check">✓</span> Everything in Pro</li>
+          <li><span class="check">✓</span> Up to 10 members</li>
+          <li><span class="check">✓</span> Admin panel</li>
+          <li><span class="check">✓</span> Role management</li>
+          <li><span class="check">✓</span> Cross-user task view</li>
+          <li><span class="check">✓</span> Dedicated support</li>
+        </ul>
+        <button class="btn-tier-outline" (click)="goToRegister()">Start with Team</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REVIEWS ─── -->
+<section class="section reviews-section" id="reviews">
+  <div class="section-inner">
+    <p class="section-eyebrow">Reviews</p>
+    <h2 class="section-title">Loved by people who hate clutter</h2>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"TaskManager completely changed how I handle my freelance projects. The subtask board alone is worth it — I finally know exactly where every deliverable stands."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">AR</div>
+          <div>
+            <strong>Alex R.</strong>
+            <span>Freelance Designer</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Clean UI, ridiculously fast, and the calendar view makes sprint planning so much easier. Switched from Notion and haven't looked back."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">MT</div>
+          <div>
+            <strong>Maria T.</strong>
+            <span>Product Manager</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"As a developer I appreciate how lightweight it is. The analytics dashboard gives me exactly the info I need without five dashboards to dig through."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">JK</div>
+          <div>
+            <strong>James K.</strong>
+            <span>Software Engineer</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★☆</div>
+        <p class="review-text">"I'm a grad student juggling coursework, research, and part-time work. The priority system and due dates keep me sane during deadlines."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">SL</div>
+          <div>
+            <strong>Sophie L.</strong>
+            <span>Graduate Student</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="reviews-disclaimer">Sample testimonials for portfolio demo purposes.</p>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="section faq-section" id="faq">
+  <div class="section-inner faq-inner">
+    <div class="faq-header">
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">Common questions</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item" *ngFor="let item of faqItems; let i = index" [class.open]="item.open">
+        <button class="faq-question" (click)="toggleFaq(i)">
+          <span>{{ item.question }}</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>{{ item.answer }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BOTTOM CTA ─── -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <h2>Ready to clear the noise?</h2>
+    <p>Join thousands of people who use TaskManager to get more done with less stress.</p>
+    <div class="cta-buttons">
+      <button class="btn-cta-white" (click)="goToRegister()">Create Free Account</button>
+      <button class="btn-cta-ghost" (click)="goToLogin()">I already have an account</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        TaskManager
+      </span>
+      <p>A modern task manager built with Angular 18 + Supabase.</p>
+    </div>
+    <div class="footer-links">
+      <a (click)="scrollTo('features')">Features</a>
+      <a (click)="scrollTo('pricing')">Pricing</a>
+      <a (click)="scrollTo('faq')">FAQ</a>
+      <a (click)="goToLogin()">Sign In</a>
+      <a (click)="goToRegister()">Register</a>
+    </div>
+    <div class="footer-stack">
+      <span>Built with</span>
+      <span class="stack-pill">Angular 18</span>
+      <span class="stack-pill">Supabase</span>
+      <span class="stack-pill">Vercel</span>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© {{ currentYear }} TaskManager · All rights reserved</p>
+  </div>
+</footer>
